@@ -17,8 +17,12 @@ class BlogsController < ApplicationController
     # render :new 
     # end
 
-    # back機能を兼ね揃えたcreateの書き方。backの時parameterが失われない。
-    @blog = Blog.new(blog_params)
+    # back機能を兼ね揃えたcreateの書き方。back時parameterが失われない。
+    # @blog = Blog.new(blog_params)
+    # @blog.user_id = current_user.id
+    # 上記2行は下記1行で完結できる。current_user.blogs.buildは「ログイン中のユーザーの、blogを、build(new)する」
+    @blog = current_user.blogs.build(blog_params)
+    # binding.irb
     if params[:back]
       render :new
     else
@@ -50,7 +54,10 @@ class BlogsController < ApplicationController
   end
 
   def confirm
-    @blog = Blog.new(blog_params)
+    # @blog = Blog.new(blog_params)
+    # @blog.user_id = current_user.id
+    @user = User.find(session[:user_id])
+    @blog = current_user.blogs.build(blog_params)
     if @blog.invalid?
       render :new
     end
