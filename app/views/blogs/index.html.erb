@@ -9,7 +9,7 @@
   </tr>
 <% @blogs.each do |blog| %>
   <tr>
-    <td><%= image_tag blog.user.photo.to_s%></td>
+    <td><%= image_tag blog.user.photo.url %></td>
     <td><%= blog.user.name %></td>
     <td><%= blog.title %></td>
     <td><%= blog.content %></td>

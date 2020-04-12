@@ -1,6 +1,6 @@
 <h1><%= @user.name %>のページ</h1>
 <p>メールアドレス: <%= @user.email %></p>
-<p>ユーザーフォト: <%= image_tag @user.photo.to_s %></p>
+<p>ユーザーフォト: <%= image_tag @user.photo.url %></p>
 <br>
 <%= link_to "ブログ一覧画面にもどる", blogs_path %>
 <br>
