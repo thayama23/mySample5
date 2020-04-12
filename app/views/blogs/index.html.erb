@@ -2,12 +2,14 @@
 <p><%= notice %></p>
 <table>
   <tr>
+    <th>ユーザーフォト</th>
     <th>ユーザー</th>
     <th>タイトル</th>
     <th>内容</th>
   </tr>
 <% @blogs.each do |blog| %>
   <tr>
+    <td><%= image_tag blog.user.photo.to_s%></td>
     <td><%= blog.user.name %></td>
     <td><%= blog.title %></td>
     <td><%= blog.content %></td>

@@ -8,6 +8,8 @@ class User < ApplicationRecord
                     mailRegex = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
                     before_validation { email.downcase! }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :new
+  private
+  
 end
 
