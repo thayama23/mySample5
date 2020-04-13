@@ -17,5 +17,14 @@
     <%= form.label :content %>
     <%= form.text_field :content %>
   </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <!-- 確認画面から新規作成画面に戻った時に、 -->
+    <!-- アップロードした画像を表示させるための記述 -->
+    
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
+
   <%= form.submit %>
 <% end %>

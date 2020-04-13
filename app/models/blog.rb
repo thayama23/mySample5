@@ -4,4 +4,6 @@ class Blog < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
 
   validates :title, presence: true
+
+  mount_uploader :photo, ImageUploader
 end
