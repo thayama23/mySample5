@@ -6,6 +6,7 @@
     <th>ユーザー</th>
     <th>タイトル</th>
     <th>内容</th>
+    <th>フォト投稿</th>
   </tr>
 <% @blogs.each do |blog| %>
   <tr>
@@ -13,12 +14,19 @@
     <td><%= blog.user.name %></td>
     <td><%= blog.title %></td>
     <td><%= blog.content %></td>
-    
-    <td><%= link_to '詳細を確認する', blog_path(blog.id) %></td>
-    <td><%= link_to "ブログを編集する", edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' } %></td>
-    <td><%= link_to 'ブログを削除する', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-    
- </tr>
+    <td><%= image_tag blog.photo.url %></td>
+
+    <% if logged_in? %>
+      <td><%= link_to '詳細確認', blog_path(blog.id) %></td>
+        <% if blog.user_id == current_user.id %>
+          <td><%= link_to "ブログ編集", edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' } %></td>
+          <td><%= link_to 'ブログ削除', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+        <% end %>
+    <% else %>
+      <td><%= link_to '詳細確認', blog_path(blog.id) %></td>
+    <% end %>
+
+  </tr>
 <% end %>
 </table>
 <br>
