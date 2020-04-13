@@ -22,7 +22,7 @@ class BlogsController < ApplicationController
     # @blog.user_id = current_user.id
     # 上記2行は下記1行で完結できる。current_user.blogs.buildは「ログイン中のユーザーの、blogを、build(new)する」
     @blog = current_user.blogs.build(blog_params)
-    binding.irb
+    # binding.irb
     if params[:back]
       render :new
     else
@@ -47,6 +47,7 @@ class BlogsController < ApplicationController
 
   def update
     if @blog.update(blog_params)
+      # binding.irb
       redirect_to blogs_path, notice:"ブログを編集しました。"
     else
       render :edit
@@ -76,7 +77,7 @@ class BlogsController < ApplicationController
 
   private
   def blog_params
-    params.require(:blog).permit(:title, :content, :photo, :photo_cache)
+    params.require(:blog).permit(:title, :content, :photo, :photo_cache, :image)
   end
 
   def set_blog
