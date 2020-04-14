@@ -1,5 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?, only: [:edit, :destroy]
+
   def index
     @blogs = Blog.all
     
@@ -27,6 +29,9 @@ class BlogsController < ApplicationController
       render :new
     else
       if @blog.save
+        # binding.irb
+        NoticeMailer.notice_mailer(@blog).deliver
+        # binding.irb
         redirect_to blogs_path, notice: "ブログを作成しました！"
       else
         render :new
@@ -35,6 +40,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    
   end
 
   def edit
@@ -77,11 +83,17 @@ class BlogsController < ApplicationController
 
   private
   def blog_params
-    params.require(:blog).permit(:title, :content, :photo, :photo_cache, :image)
+    params.require(:blog).permit(:title, :content, :image, :image_cache)
   end
 
   def set_blog
     @blog = Blog.find(params[:id])
+  end
+
+  def logged_in?
+    unless current_user.present?
+      redirect_to new_user_path, notice: "ログインするか新規ユーザー設定後Blogをご使用下さい。"
+    end
   end
 end
 
