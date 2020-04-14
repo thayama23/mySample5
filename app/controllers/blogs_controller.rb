@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in?, only: [:edit, :destroy]
+  # before_action :logged_in?, only: [:edit, :destroy]
 
   def index
     @blogs = Blog.all
@@ -90,11 +90,11 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
-  def logged_in?
-    unless current_user.present?
-      redirect_to new_user_path, notice: "ログインするか新規ユーザー設定後Blogをご使用下さい。"
-    end
-  end
+  # def logged_in?
+  #   unless current_user.present?
+  #     redirect_to new_user_path, notice: "ログインするか新規ユーザー設定後Blogをご使用下さい。"
+  #   end
+  # end
 end
 
 
